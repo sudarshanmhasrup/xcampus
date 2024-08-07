@@ -29,5 +29,15 @@ app.use((response, request, next) => {
     }
 });
 
+// Connection successful message
+app.get("/", (request, response) => {
+    response.status(200).json({
+        response: {
+            message: "API connection established successfully!"
+        },
+        status: 200
+    });
+});
+
 // Export the express app
 module.exports = app;
