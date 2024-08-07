@@ -1,6 +1,10 @@
 // Import the neccessary packages
 const express = require("express");
 const apiMiddleware = require("./middleware/apiMiddleware");
+const bodyParser = require("body-parser");
+
+// Import all the routes
+const loginRoute = require("./routes/login/route");
 
 // Configure dotenv
 require("dotenv").config();
@@ -8,26 +12,14 @@ require("dotenv").config();
 // Configure the express app
 const app = express();
 
+// Configure the body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 // Use the api middleware
 app.use(apiMiddleware);
-
-// API middlware setup
-app.use((response, request, next) => {
-    
-    // Check for the API key in the request header
-    const requestApiKey = request.header("x-api-key");
-
-    // Check for authentication
-    if (requestApiKey !== process.env.API_KEY) {
-        return response.status(500).json({
-            response: {
-                message: "Access denied!",
-                reason: "Unauthorized access."
-            },
-            status: 500
-        });
-    }
-});
 
 // Connection successful message
 app.get("/", (request, response) => {
@@ -38,6 +30,9 @@ app.get("/", (request, response) => {
         status: 200
     });
 });
+
+// Use the login route
+app.use(loginRoute);
 
 // Export the express app
 module.exports = app;
