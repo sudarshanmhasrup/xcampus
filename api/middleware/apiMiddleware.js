@@ -8,7 +8,7 @@ app.use((request, response, next) => {
     // Check for the API key in the request header
     const requestApiKey = request.header("x-api-key");
 
-    // Check for authentication
+    // Check for the request api key
     if (requestApiKey !== process.env.API_KEY) {
         return response.status(401).json({
             response: {
