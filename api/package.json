@@ -3,10 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
-  "keywords": ["Xcampus", "Node JS", "Rest API", "PostgreSQL"],
+  "keywords": [
+    "Xcampus",
+    "Node JS",
+    "Rest API",
+    "PostgreSQL"
+  ],
   "author": "Sudarshan Mhasrup",
   "license": "ISC",
-  "description": "The backend API for Xcampus written in Express JS."
+  "description": "The backend API for Xcampus written in Express JS.",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
 }
