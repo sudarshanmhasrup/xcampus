@@ -1,6 +1,9 @@
 // Import neccessary packages
 const http = require("http");
 
+// Import the express app
+const app = require("./app");
+
 // Server configuration
 const server = http.createServer();
 const port = process.env.API_PORT;
