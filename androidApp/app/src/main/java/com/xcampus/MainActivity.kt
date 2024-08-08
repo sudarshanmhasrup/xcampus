@@ -3,45 +3,35 @@ package com.xcampus
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.xcampus.ui.theme.XcampusTheme
+import com.xcampus.views.InitApp
 
+// The main activity
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            XcampusTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Surface(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                InitApp(
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }
 }
 
+@Preview(
+    showBackground = true
+)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun PreviewApp() {
+    InitApp(
+        modifier = Modifier.fillMaxSize()
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    XcampusTheme {
-        Greeting("Android")
-    }
 }
