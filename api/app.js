@@ -2,16 +2,20 @@
 const express = require("express");
 const apiMiddleware = require("./middleware/apiMiddleware");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 // Import all the routes
-const databaseConnection = require("./routes/database-connection/route")
-const loginRoute = require("./routes/login/route");
+const databaseConnection = require("./routes/database/route")
+const loginRoute = require("./routes/auth/login/route");
 
 // Configure dotenv
 require("dotenv").config();
 
 // Configure the express app
 const app = express();
+
+// Enable cross-origin requests
+app.use(cors());
 
 // Configure the body parser
 app.use(bodyParser.json());
@@ -33,8 +37,8 @@ app.get("/", (request, response) => {
 });
 
 // Use all the routes
-app.use(loginRoute);
 app.use(databaseConnection);
+app.use(loginRoute);
 
 // Catch errors
 app.use((request, response, next) => {
