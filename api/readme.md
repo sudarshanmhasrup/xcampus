@@ -8,7 +8,7 @@ This is the backend API for XCampus written in Express JS. This API is a middlew
 #### Test API connection
 To test the API connectivity you can send a simple HTTP request at the host URL. 
 
-```http
+```request
   GET /
 ```
 
