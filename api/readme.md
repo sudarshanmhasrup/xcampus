@@ -28,6 +28,21 @@ Response when the connection is unsuccesssful.
 ```
 
 
+### Check database connection
+To check if the database is connected with the API, you can use the following route:
+
+```request
+  GET /database/connection/test
+```
+Response when the connection is successsful.
+```response
+    "response": {
+        "message": "Database connection has been established successfully!"
+    }
+    "status": 200
+```
+
+
 ### Authentication Routes
 To send a login request, I have defined two routes. If your application has chosen a form where you want to get user ID and user password together, then you can directly use the second route. But if you have divided user ID input and user password input into two different layouts, then you can use the first layout to verify if the user's account exits and then jump on to the next route.
 

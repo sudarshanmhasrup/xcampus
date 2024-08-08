@@ -30,7 +30,8 @@ router.get("/database/connection/test", (request, response) => {
             response.status(200).json({
                 response: {
                     message: "Database connection has been established successfully!"
-                }
+                },
+                status: 200
             });
         }
     });
