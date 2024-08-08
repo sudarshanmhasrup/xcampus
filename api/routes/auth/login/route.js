@@ -13,7 +13,56 @@ const pool = new Pool({
     password: process.env.DATABASE_PASSWORD
 });
 
-// Configure a route to handle login requests
+// Configure a route to check if the user's account exits in database
+router.post("/auth/login/check-account-exist", (request, response) => {
+
+    // Fetch the userID from the request body
+    const userId = request.body.userId;
+
+    // Ensure that the request body is not empty
+    if (Object.keys(request.body).length == 0) {
+        return response.status(401).json({
+            response: {
+                message: "Request denied!",
+                reason: "The request body cannot be empty."
+            }, status: 401
+        });
+    }
+
+    // Run query to database
+    pool.query("SELECT email_address FROM users WHERE email_address = $1", [userId], (error, queryResponse) => {
+        if (error) {
+            return response.status(500).json({
+                response: {
+                    message: "Database connection failed!",
+                    reason: "An unexpected error has occured while fetching database.",
+                    log: error
+                },
+                status: 500
+            });
+        } else {
+            if (queryResponse.rowCount == 0) {
+                return response.status(401).json({
+                    response: {
+                        message: "Login failed!",
+                        reason: "Account not found.",
+                        log: userId + ""
+                    },
+                    status: 401
+                });
+            } else {
+                return response.status(200).json({
+                    response: {
+                        message: "Account exits!",
+                    },
+                    status: 200
+                });
+            }
+        }
+    });
+});
+
+// Configure a route to handle full login request
 router.post("/auth/login", (request, response) => {
 
     // Fetch the userID and userPassword from the request body
@@ -30,7 +79,7 @@ router.post("/auth/login", (request, response) => {
     }
 
     // Run query to database
-    pool.query("SELECT * FROM users", (error, queryResponse) => {
+    pool.query("SELECT * FROM users WHERE email_address = $1", [userId], (error, queryResponse) => {
         if (error) {
             return response.status(500).json({
                 response: {
@@ -76,6 +125,7 @@ router.post("/auth/login", (request, response) => {
         }
     });
 });
+
 
 // Export the login route
 module.exports = router;

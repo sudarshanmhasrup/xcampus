@@ -27,7 +27,29 @@ Response when the connection is unsuccesssful.
     "status": 200
 ```
 
+### Authentication Routes
+To send a login request I have defined two routes. If your application has choosen a form where you want to get userId and userPassword together then you can directly use the second route. But if you have divided user id input and user password input into two different layout then you can use the first layout to verify if user's account exits and then jump on to the next route.
 
+```request
+  POST /auth/login/check-account-exist
+```
+
+Response for the first route if the user's account exits
+```response
+    "response": {
+        "message": "Account exits!"
+    },
+    "status": 200
+```
+
+Response for the first route if the user's account does't exits
+```response
+    "response": {
+        "message": "Login failed!"
+        "reason": "Account not found.",
+    },
+    "status": 401
+```
 
 ### Author
 
