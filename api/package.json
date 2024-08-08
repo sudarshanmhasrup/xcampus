@@ -5,12 +5,6 @@
   "scripts": {
     "start": "nodemon index.js"
   },
-<<<<<<< HEAD
-  "keywords": ["Xcampus", "Node JS", "Rest API", "PostgreSQL"],
-  "author": "Sudarshan Mhasrup",
-  "license": "ISC",
-  "description": "The backend API for Xcampus written in Express JS."
-=======
   "keywords": [
     "Xcampus",
     "Node JS",
@@ -28,5 +22,4 @@
     "nodemon": "^3.1.4",
     "pg": "^8.12.0"
   }
->>>>>>> api
 }
